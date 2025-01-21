@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .game-container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="number"] {
+            width: 50px;
+            text-align: center;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Guess the Number</h1>
+        <p id="message">Guess a number between 1 and 100:</p>
+        <input type="number" id="guess" min="1" max="100">
+        <button onclick="checkGuess()">Submit Guess</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        let secretNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            let guess = document.getElementById("guess").value;
+            let message = "";
+
+            if (guess < 1 || guess > 100) {
+                message = "Please enter a number between 1 and 100.";
+            } else {
+                attempts++;
+                if (guess == secretNumber) {
+                    message = "Congratulations! You've guessed the number in " + attempts + " attempts.";
+                } else if (guess < secretNumber) {
+                    message = "Too low! Try again.";
+                } else {
+                    message = "Too high! Try again.";
+                }
+            }
+
+            document.getElementById("message").innerText = message;
+            document.getElementById("guess").value = "";
+        }
+    </script>
+</body>
+</html>
